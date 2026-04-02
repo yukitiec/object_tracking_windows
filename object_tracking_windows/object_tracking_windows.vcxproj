@@ -15,7 +15,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8dee280e-d859-447e-9976-a413fdd87e96}</ProjectGuid>
-    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>x64</Platform>
     <ProjectName>object_tracking_windows</ProjectName>
@@ -56,9 +56,12 @@
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
   </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <VcpkgConfiguration>Debug</VcpkgConfiguration>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\libtorch-win-shared-with-deps-debug-2.0.1+cu118\libtorch\include;C:\libtorch-win-shared-with-deps-debug-2.0.1+cu118\libtorch\include\torch\csrc\api\include;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\include;C:\Program Files\NVIDIA Corporation\NvToolsExt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\libtorch-win-shared-with-deps-debug-2.0.1+cu118\libtorch\include;C:\libtorch-win-shared-with-deps-debug-2.0.1+cu118\libtorch\include\torch\csrc\api\include;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\include;C:\Program Files\NVIDIA Corporation\NvToolsExt\include;C:\Users\kawaw\cpp\object_tracking_windows\object_tracking_windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -66,7 +69,7 @@
       <DisableSpecificWarnings>4267;4251;4522;4838;4305;4244;4190;4101;4996;4275</DisableSpecificWarnings>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
-      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <Optimization>Disabled</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -89,7 +92,8 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <PostBuildEvent>
-      <Message></Message>
+      <Message>
+      </Message>
       <Command>setlocal
 xcopy "C:\libtorch-win-shared-with-deps-debug-2.0.1+cu118\libtorch\lib" "C:\Users\kawaw\cpp\object_tracking_windows\object_tracking_windows\x64\Debug" /D /Y
 if %errorlevel% neq 0 goto :cmEnd
@@ -147,7 +151,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <PostBuildEvent>
-      <Message></Message>
+      <Message>
+      </Message>
       <Command>setlocal
 xcopy "C:\libtorch-win-shared-with-deps-2.0.1+cu118\libtorch\lib" "C:\Users\kawaw\cpp\object_tracking_windows\object_tracking_windows\x64\Release" /D /Y
 if %errorlevel% neq 0 goto :cmEnd
@@ -173,9 +178,24 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\global_parameters.h" />
+    <ClInclude Include="include\hungarian.h" />
+    <ClInclude Include="include\kalmanfilter.h" />
+    <ClInclude Include="include\manage_tracker.h" />
+    <ClInclude Include="include\utils.h" />
+    <ClInclude Include="include\yolo_detect_batch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="example-app.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\global_parameters.cpp" />
+    <ClCompile Include="src\hungarian.cpp" />
+    <ClCompile Include="src\kalmanfilter.cpp" />
+    <ClCompile Include="src\manage_tracker.cpp" />
+    <ClCompile Include="src\utils.cpp" />
+    <ClCompile Include="src\yolo_detect_batch.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="config\default.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
