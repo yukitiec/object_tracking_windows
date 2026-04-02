@@ -11,10 +11,10 @@ const double INIT_VZ = 0.0;
 const double INIT_AX = 0.0;
 const double INIT_AY = 0.0;
 const double INIT_AZ = 0.0;
-const double NOISE_POS = 1e0;//1e-4
-const double NOISE_VEL = 1e0;
-const double NOISE_ACC = 1e0;
-const double NOISE_SENSOR = 1e0;//5e0
+const double NOISE_POS =5e-1;//1e-4
+const double NOISE_VEL = 5e-1;
+const double NOISE_ACC = 5e-1;
+const double NOISE_SENSOR = 1e1;//5e0
 
 const int COUNTER_LOST = 100;//humman life span.
 

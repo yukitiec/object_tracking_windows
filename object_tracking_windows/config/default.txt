@@ -1,7 +1,7 @@
 display true           // whether display images or not
 time_capture 70        // time to capture images [seconds]
 
-yolo_path C:/Users/kawaw/cpp/object_tracking_windows/object_tracking_windows/config/yolov10m_w640_h480.torchscript
+yolo_path C:/Users/kawaw/cpp/object_tracking_windows/object_tracking_windows/config/yolov10m_w640_h480.torchscript //yolov10n does not work well.
 yoloWidth 640 //YOLO input image width
 yoloHeight 480  //YOLO input image height
 IoU_threshold 0.7 // IoU threshold for removing duplicated object
