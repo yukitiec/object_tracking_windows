@@ -20,7 +20,7 @@ private:
 	HungarianAlgorithm _hungarian;
 	const unsigned int _counter_update_valid = 10;//10 times update to make the tracker valid one.
 	const double _cost_max = 1e5;// 10.0;
-	const double _time_lost = 2.0;//2.0 second missing -> loss.
+	const double _time_lost = 1.0;//2.0 second missing -> loss.
 public:
 	const unsigned int _n_minimum_valid_sequence = 10;//minimum valid sequence.
 

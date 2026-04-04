@@ -1,0 +1,90 @@
+I am trying to create the dockerfile and docker-compose.yml to meet this criterion in docker container. I am using windows and try to build ubuntu20.04 docker environment. Could you write the Dockerfile, docker-compose.yml, pre-commit-config.yaml, makefile and CMake file to move the C++ code in ROS2-humble.
+[The requirements of Docker]
+A Dockerfile that: 
+○ Installs ROS (ROS2 humble) and required dependencies (refer to included or imported libraries and below)
+(Python : numpy, pytorch (pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cpu), ultralytics (pip install -U ultralytics)
+C++; libtorch( https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-2.11.0%2Bcpu.zip), OpenCV(wget -O opencv.zip https://github.com/opencv/opencv/archive/4.x.zip)). 
+○ Builds your ROS workspace and packages (ROS2-humble). 
+○ Sets up any required environment (for example, sourcing ROS setup, entrypoint scripts). 
+
+• A docker‑compose.yml that: 
+○ Builds your image. 
+○ Runs the container with access to the host webcam. 
+○ Sets any required environment variables, volumes, or network configuration. The system should be startable with a small number of commands, 
+for example: • docker compose build • docker compose up 
+
+・Repository structure
+├── docker/ 
+│ ├── Dockerfile 
+│ └── docker-compose.yml 
+├── ros_ws/ │ 
+├── src/ 
+│ │ └── global_parameters.cpp
+│ │ └── hungarian.cpp
+│ │ └── kalmanfilter.cpp
+│ │ └── manage_tracker.cpp
+│ │ └── utils.cpp
+│ │ └── yolo_detect_batch.cpp
+├── include/
+│ │ └── global_parameters.h
+│ │ └── hungarian.h
+│ │ └── kalmanfilter.h
+│ │ └── manage_tracker.h
+│ │ └── utils.h
+│ │ └── yolo_detect_batch.h
+├── config/
+│ │ └── default.txt
+│ │ └── yolov10m_w640_h480.torchscript
+├── make_torchscript/ │ 
+│ ├── makeTorchScript.ipynb
+├── analysis/ │ 
+│ ├── analysis.ipynb
+├── tests/ 
+│ ├── main.cpp
+├── .pre-commit-config.yaml 
+├── README.md 
+└── scripts/ or Makefile  
+
+[Pre‑commit]
+.pre-commit-config.yaml should includes 
+ Provide a .pre-commit-config.yaml with at least: o Formatting and linting for your chosen language: ▪ For Python: for example, black, isort, flake8 or ruff. ▪ For C++: for example, clang-format, cpplint or similar. o Document: ▪ How to install pre‑commit (for example, pip install pre-commit, pre-commit install). ▪ How to run the hooks manually, for example: • The code in your default branch should pass the configured pre‑commit checks. • pre-commit run --all-files 
+
+[How to test]
+Use any reasonable testing framework, for example: ○ pytest (Python). ○ gtest (C++). ○ ROS testing tools are also acceptable. • Tests should not depend on a physical camera: ○ Separate image processing logic into testable functions/classes. ○ Use synthetic images or mocks/stubs for capture where needed. 
+
+[included or imported libraries]
+C++
+#include <torch/torch.h>
+#include <torch/script.h>
+#include <opencv2/opencv.hpp>
+#include <opencv2/calib3d.hpp>
+#include <opencv2/optflow.hpp>
+#include <opencv2/video/tracking.hpp>
+#include <opencv2/optflow/rlofflow.hpp>
+#include "opencv2/core.hpp"
+#include <opencv2/core/utility.hpp>
+#include "opencv2/core/hal/hal.hpp"
+#include "opencv2/core/ocl.hpp"
+#include <queue>
+#include <mutex>
+#include <chrono>
+#include <fstream>
+#include <sstream>
+#include <filesystem>
+#include <thread>
+#include <iostream>
+#include <vector>
+#include <array>
+#include <ctime>
+#include <direct.h>
+#include <sys/stat.h>
+#include <algorithm>
+
+Python
+from ultralytics import YOLO
+import torch
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import os 
+
