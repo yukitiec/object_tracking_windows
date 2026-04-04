@@ -56,6 +56,7 @@ Because webcam access in Docker Desktop + WSL2 can be limited depending on host 
 - **C++17**
 
 ### Main libraries
+- Install with [vcpkg](https://learn.microsoft.com/en-us/vcpkg/get_started/get-started-msbuild?pivots=shell-powershell)
 - OpenCV
 - LibTorch (TorchScript runtime)
 
