@@ -151,7 +151,7 @@ object_index 73,76
 	- Place the generated deployment model in: ros_ws/src/tracker_pkg/config/
 
 
-## 7. Webcam (Video file-based tracking is not still implemented)
+## 8. Webcam (Video file-based tracking is not still implemented)
 - Webcam mode (not tested in the linux version. [tested with windows](https://github.com/yukitiec/object_tracking_windows.git))
 	- Set none in video_path:
 	```txt
@@ -162,7 +162,7 @@ object_index 73,76
 	/camera/image_raw
 	```
 
-## 8. Output Files
+## 9. Output Files
 - Saved under:
 ```text
 video_path/<timestamp>/
@@ -173,7 +173,7 @@ video_path/<timestamp>/
 	- object_2d_kf.csv : Kalman filtered data (N_step, 6(time, label, left,top,width,height))
 	- output_video.mp4 : captured image
 
-## 9. Design Decisions
+## 10. Design Decisions
 - Why YOLOv10m + SORT
 	- Strong detector + lightweight tracker
 	- Practical for realtime multi-object tracking
@@ -182,7 +182,7 @@ video_path/<timestamp>/
 	- Enables C++ deployment
 	- Simplifies runtime inference in Docker
 
-## 10. Future Improvements
+## 11. Future Improvements
 - 3D positioning.
 - system robust to occlusion.
 
